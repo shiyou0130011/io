@@ -6,7 +6,7 @@ import (
 )
 
 // load all files in folderPath
-func loadFilesInFolder(folderPath string) (fileList []string, err error) {
+func LoadFilesInFolder(folderPath string) (fileList []string, err error) {
 	files, err := ioutil.ReadDir(folderPath)
 
 	if err != nil {
@@ -15,7 +15,11 @@ func loadFilesInFolder(folderPath string) (fileList []string, err error) {
 
 	for _, file := range files {
 		if file.IsDir() {
-			fileList = append(fileList, loadFilesInFolder(path.Join(folderPath, file.Name()))...)
+			list, err := LoadFilesInFolder(path.Join(folderPath, file.Name()))
+			if err != nil {
+				continue
+			}
+			fileList = append(fileList, list...)
 			continue
 		}
 		fileList = append(fileList, path.Join(folderPath, file.Name()))
