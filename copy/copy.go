@@ -66,11 +66,11 @@ func Dir(sourceFolder string, outputFolder string) {
 			if err != nil {
 				log.Printf("Cannot create folder %s", outPath)
 			} else {
-				copyDir(sourcePath, outPath)
+				Dir(sourcePath, outPath)
 			}
 
 		} else {
-			copyFile(sourcePath, outputFolder, fi.Name())
+			File(sourcePath, outputFolder, fi.Name())
 		}
 	}
 }
