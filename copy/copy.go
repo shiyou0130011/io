@@ -1,7 +1,6 @@
 package copy
 
 import (
-	"embed"
 	"fmt"
 	"io/fs"
 	"io/ioutil"
@@ -26,7 +25,7 @@ func File(sourceFolderPath string, outputFolderPath string, relativeFilePath str
 
 // FS is for copying the file (path is the FS's path) to outputFolderPath
 // It can be copy folder or file
-func FS(f embed.FS, path string, outputFolderPath string) {
+func FS(f fs.ReadFileFS, path string, outputFolderPath string) {
 	fs.WalkDir(f, path, func(filePath string, d fs.DirEntry, err error) error {
 		rel, err := filepath.Rel(path, filePath)
 		if err != nil {
