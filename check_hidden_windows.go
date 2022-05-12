@@ -8,7 +8,8 @@ import (
 	"syscall"
 )
 
-func isHidden(path string) (bool, error) {
+// Whether the file is hidden-file
+func IsHidden(path string) (bool, error) {
 	// This func code is from https://freshman.tech/snippets/go/detect-hidden-file/
 	// Author is Ayo
 	// At 2022-04-08
