@@ -38,11 +38,12 @@ func LoadFilesInFolderIgnoreHiddenFiles(folderPath string) (fileList []string, e
 	}
 
 	for _, file := range files {
-		if yes, err := isHidden(file.Name()); yes || err != nil {
+		fileFullPath := path.Join(folderPath, file.Name())
+		if yes, err := isHidden(fileFullPath); yes || err != nil {
 			continue
 		}
 		if file.IsDir() {
-			list, err := LoadFilesInFolder(path.Join(folderPath, file.Name()))
+			list, err := LoadFilesInFolderIgnoreHiddenFiles(fileFullPath)
 			if err != nil {
 				continue
 			}
